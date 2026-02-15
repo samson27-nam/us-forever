@@ -18,10 +18,15 @@ const Register: React.FC = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.post(
-        `${process.env.VITE_API_URL}/api/auth/register`,
-        { name, email, password },
-      );
+      // Vite exposes env vars through `import.meta.env` rather than `process.env`
+      // (process.env is undefined in the browser bundle).
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      console.log(apiUrl);
+      const res = await axios.post(`${apiUrl}/api/auth/register`, {
+        name,
+        email,
+        password,
+      });
       login(res.data.token, res.data.user);
       navigate("/gallery");
     } catch (err: any) {

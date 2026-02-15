@@ -22,8 +22,9 @@ const Gallery: React.FC = () => {
 
   const fetchPhotos = async () => {
     try {
-      // In production use real VITE_API_URL
-      const res = await axios.get(`${process.env.VITE_API_URL}/api/photos`);
+      // Vite env variables are accessed on import.meta.env
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const res = await axios.get(`${apiUrl}/api/photos`);
       setPhotos(res.data);
     } catch (err) {
       console.error(err);
@@ -54,7 +55,8 @@ const Gallery: React.FC = () => {
     formData.append("caption", caption);
 
     try {
-      await axios.post(`${process.env.VITE_API_URL}/api/photos`, formData, {
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      await axios.post(`${apiUrl}/api/photos`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setShowUpload(false);
@@ -71,7 +73,8 @@ const Gallery: React.FC = () => {
   const deletePhoto = async (id: string) => {
     if (!window.confirm("Forget this moment?")) return;
     try {
-      await axios.delete(`${process.env.VITE_API_URL}/api/photos/${id}`);
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      await axios.delete(`${apiUrl}/api/photos/${id}`);
       fetchPhotos();
     } catch (err) {
       alert("Delete failed");
