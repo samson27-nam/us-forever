@@ -34,8 +34,22 @@ const Home: React.FC = () => {
         </h1>
         <p className="text-2xl md:text-3xl text-stone-400 font-light italic max-w-2xl mx-auto leading-relaxed">
           "Every picture tells a story of a heart that found its home. Let's
-          keep writing ours, one memory at a time."
+          keep writing ours, one memory at a time. I love you Esther"
         </p>
+
+        {/* music iframe for ambience */}
+        <div className="mt-8 w-full max-w-xl mx-auto">
+          <iframe
+            data-testid="embed-iframe"
+            style={{ borderRadius: 12 }}
+            src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator"
+            width="100%"
+            height="352"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
 
         <div className="pt-10">
           <Link
